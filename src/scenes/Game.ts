@@ -6,6 +6,7 @@ import { VaultSafeCodeGeneration } from "../prefabs/VaultSafeCodeGeneration";
 import { VaultSafeCodeProgress } from "../prefabs/VaultSafeCodeProgress";
 import { VaultSafeDoor } from "../prefabs/VaultSafeDoor";
 import { VaultSafeHandle } from "../prefabs/VaultSafeHandle";
+import { wait } from "../utils/misc";
 
 export default class Game extends Scene {
   name = "Game";
@@ -44,16 +45,27 @@ export default class Game extends Scene {
     Logger.getInstance().log(this.vaultSafeCodeGeneration.toString());
   }
 
-  private async onCodeFailed() {
+  private async onCodeFailed(): Promise<void> {
 
-    
-  }
+    await this.vaultSafeHandle.rotateRapidly(2400, 2.5);
+
+    this.start();
+}
 
 
-  private async onCodeCompleted() { 
+private async onCodeCompleted(): Promise<void> {
 
-    
-  }
+    this.vaultSafeDoor.openDoor();
+    this.blink.startBlinking();
+    await wait(5);
+
+    await this.vaultSafeDoor.closeDoor();
+    this.blink.stopBlinking();
+
+    await this.vaultSafeHandle.rotateRapidly(2400, 2.5);
+
+    this.start();
+  } 
 
 
   onResize(width: number, height: number) {
