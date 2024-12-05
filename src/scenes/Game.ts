@@ -29,6 +29,8 @@ export default class Game extends Scene {
     this.background.addChild(this.vaultSafeDoor);
     this.vaultSafeDoor.addChild(this.vaultSafeHandle);
 
+    this.onCodeFailed = this.onCodeFailed.bind(this);
+    this.onCodeCompleted = this.onCodeCompleted.bind(this);
   }
 
   async start() {
