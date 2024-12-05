@@ -1,6 +1,7 @@
 import Logger from "../core/Logger";
 import Scene from "../core/Scene";
 import Background from "../prefabs/Background";
+import { Blink } from "../prefabs/Blink";
 import { VaultSafeCodeGeneration } from "../prefabs/VaultSafeCodeGeneration";
 import { VaultSafeCodeProgress } from "../prefabs/VaultSafeCodeProgress";
 import { VaultSafeDoor } from "../prefabs/VaultSafeDoor";
@@ -14,12 +15,14 @@ export default class Game extends Scene {
   private vaultSafeCodeProgress!: VaultSafeCodeProgress;
   private vaultSafeHandle!: VaultSafeHandle;
   private vaultSafeDoor!: VaultSafeDoor;
+  private blink!: Blink;
 
   load() {
 
     this.background = new Background("bg");
     this.vaultSafeHandle = new VaultSafeHandle();
     this.vaultSafeDoor = new VaultSafeDoor();
+    this.blink = new Blink();
 
     this.addChild(this.background);
     this.background.addChild(this.vaultSafeDoor);

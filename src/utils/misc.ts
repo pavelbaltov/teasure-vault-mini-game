@@ -28,3 +28,7 @@ export async function after(
 export function getEntries<T extends object>(obj: T) {
   return Object.entries(obj) as Entries<T>;
 }
+
+export function randomInRange(min: number, max: number): number {
+  return Math.random() * (max - min) + min;
+}
