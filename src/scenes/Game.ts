@@ -1,17 +1,20 @@
 import Logger from "../core/Logger";
 import Scene from "../core/Scene";
+import Background from "../prefabs/Background";
 import { VaultSafeCodeGeneration } from "../prefabs/VaultSafeCodeGeneration";
 import { VaultSafeCodeProgress } from "../prefabs/VaultSafeCodeProgress";
 
 export default class Game extends Scene {
   name = "Game";
 
+  private background!: Background;
   private vaultSafeCodeGeneration!: VaultSafeCodeGeneration;
   private vaultSafeCodeProgress!: VaultSafeCodeProgress;
 
   load() {
 
-    //this.addChild();
+    this.background = new Background("bg");
+    this.addChild(this.background);
   }
 
   async start() {
