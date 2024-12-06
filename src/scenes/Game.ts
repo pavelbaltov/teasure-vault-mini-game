@@ -1,5 +1,6 @@
 import Logger from "../core/Logger";
 import Scene from "../core/Scene";
+import { Stopwatch } from "../core/Stopwatch";
 import Background from "../prefabs/Background";
 import { Blink } from "../prefabs/Blink";
 import { VaultSafeCodeGeneration } from "../prefabs/VaultSafeCodeGeneration";
@@ -17,6 +18,7 @@ export default class Game extends Scene {
   private vaultSafeHandle!: VaultSafeHandle;
   private vaultSafeDoor!: VaultSafeDoor;
   private blink!: Blink;
+  private stopwatch!: Stopwatch;
 
   load() {
 
@@ -27,6 +29,9 @@ export default class Game extends Scene {
 
     this.addChild(this.background);
     this.background.addChild(this.vaultSafeDoor);
+    this.background.addChild(this.blink);
+    this.background.addChild(this.stopwatch);
+    this.stopwatch.position.set(this.stopwatch.x-1175, this.stopwatch.y - 150);
     this.vaultSafeDoor.addChild(this.vaultSafeHandle);
 
     this.onCodeFailed = this.onCodeFailed.bind(this);
@@ -34,6 +39,9 @@ export default class Game extends Scene {
   }
 
   async start() {
+
+    this.stopwatch.reset();
+    this.stopwatch.start();
 
     this.vaultSafeCodeGeneration = new VaultSafeCodeGeneration();
     this.vaultSafeCodeProgress = new VaultSafeCodeProgress(this.vaultSafeCodeGeneration.secretCombinations);
@@ -49,6 +57,8 @@ export default class Game extends Scene {
 
   private async onCodeFailed(): Promise<void> {
 
+    this.stopwatch.stop();
+
     await this.vaultSafeHandle.rotateRapidly(2400, 2.5);
 
     this.start();
@@ -56,6 +66,8 @@ export default class Game extends Scene {
 
 
 private async onCodeCompleted(): Promise<void> {
+
+    this.stopwatch.stop();
 
     this.vaultSafeDoor.openDoor();
     this.blink.startBlinking();
