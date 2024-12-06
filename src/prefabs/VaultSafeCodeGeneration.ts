@@ -57,7 +57,7 @@ export class VaultSafeCodeGeneration {
 
     public toString(): string {
         return this.secretCombinations
-            .map(x => `${x.displacements}, ${x.direction}`)
-            .join(" ");
+            .map(x => `${x.displacements} ${x.direction}`)
+            .join(", ");
     }
 }
