@@ -44,7 +44,7 @@ export class VaultSafeHandle extends Container {
             this.onDragMove(event);
         }
 
-        this.onpointerup = (event) => {
+        this.onpointerup = () => {
             this.onDragEnd();
         }
 

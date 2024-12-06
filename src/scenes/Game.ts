@@ -26,6 +26,7 @@ export default class Game extends Scene {
     this.vaultSafeHandle = new VaultSafeHandle();
     this.vaultSafeDoor = new VaultSafeDoor();
     this.blink = new Blink();
+    this.stopwatch = new Stopwatch();
 
     this.addChild(this.background);
     this.background.addChild(this.vaultSafeDoor);
@@ -36,6 +37,8 @@ export default class Game extends Scene {
 
     this.onCodeFailed = this.onCodeFailed.bind(this);
     this.onCodeCompleted = this.onCodeCompleted.bind(this);
+
+    console.log("starting");
   }
 
   async start() {
