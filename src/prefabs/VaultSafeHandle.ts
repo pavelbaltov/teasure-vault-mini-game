@@ -11,7 +11,7 @@ export class VaultSafeHandle extends Container {
 
     private previousAngle: number | null = null;
     private lastMousePosition: Point | null = null;
-    private readonly ROTATION_THRESHOLD = (2 * Math.PI) / 180;  //5 degrees in radians
+    private readonly ROTATION_THRESHOLD = (0.25 * Math.PI) / 180;  //0.25 degrees in radians
     private accumulatedRotation: number = 0;
 
     private isRotating: boolean = false;
